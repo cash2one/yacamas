@@ -1,0 +1,69 @@
+{% extends "cms/base.html" %}
+{% block main %}
+  {% load staticfiles %}
+		<div id="main" class="toplvl-box"> 
+			<div class="cate-kj-content"> 
+				<div class="content-lft">
+					<div class="head">
+						<div class="head-content">
+							<span class="sec" id='gyjj' mark="gyjj">工艺简介</span>
+							<span class="sec" mark="dtys">动态演示</span>
+							<span class="sec" mark="sdkj">四大特性</span>
+							<span class="sec" mark="qdtd">疑问解答</span>
+						</div>
+						<div class="foot">
+							<span class="up scroll-nrw">&nbsp;</span>
+							<span class="down scroll-nrw">&nbsp;</span>
+						</div>
+						<div class="clr"></div>
+					</div>
+					<div class="main">
+						<div class="scroll-content content">
+                          
+						</div>
+						<div class="content-rgt"></div>
+					</div>
+					<div class="kj-thumb">
+                      <a href="/cms/?m=4a&aid=6"><div id='4a'></div></a>
+						<a href="/cms/?m=eeq&aid=7"><div id='eeq'></div></a>
+						<a href="/cms/?m=upc&aid=8"><div id='upc'></div></a>
+						<a href="/cms/?m=t-plus&aid=9"><div id='rk'></div></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	<div id="bg-wrapper">
+			<img id="bg-all" style="display:none;width:100%;" src="{% static 'cms/default/images/bgbig/a11.jpg' %}"  />
+		</div>
+<script>
+var data = {'gyjj':' <span style="line-height:30px"><img src="{% static 'cms/default/images/eeq-page.png' %}" style="margin:10px 10px 5px 0px; float:left" /> EEQ记忆衬衫是乔治白基于新型分子交叉记忆技术研发的易打理系列衬衫，无论在自然挺平、舒适性还是生态低碳性上都处于同类产品国际领先水平。<br/> 经过EEQ记忆整理后，产生分子链交叉作用，衣物平均抗皱性能超过国标要求，使成衣自然挺平效果不受洗涤次数影响，无需熨烫，恒久保持衣物平整性。记忆整理工艺全程采用生态原料，低碳无污染，是升级版生态产品。<br/> EEQ分子交叉作用使得衣物纤维产生特殊分子通道，保证面料良好的吸湿透气性，令手感滑爽丰满，色泽亮丽，穿着更为舒适，透气，呵护肌肤。</span>',
+    'dtys':'<span> <div style="margin:10px 0px 0px 60px;padding:0px" class="player video-box"> <embed src="/static/pub/ckplayer/ckplayer.swf" flashvars="f=/static/cms/default/images/eeq.flv&p=0" quality="high" width="428" height="229" align="middle" allowScriptAccess="always" allowFullscreen="true" type="application/x-shockwave-flash"></embed> </div> </span>',
+    'sdkj':'<span><image src="{% static 'cms/default/images/eeq-sdtx.png'%}" style=" margin-left:20px;display:block; padding-bottom:10px" /> <strong>极佳抗皱性：</strong>采用独有的特殊工艺处理后，使衣物抗皱性能达到并高于国家最高等级标准，具有持久的良好记忆功能, 百洗不皱，无需熨烫自然挺平。<br/> <strong>吸湿透气性：</strong>经EEQ记忆整理分子交叉作用后，衣物纤维产生特殊分子通道，在分子相互作用下，保证了衣物的吸湿透气性能处于极佳的状态。<br/> <strong>触感舒适性：</strong>EEQ记忆整理后的四面体旋转结构令衣物手感特别柔软滑爽、色泽度好、拥有良好的悬垂感，穿着舒适、呵护您的肌肤。<br/> <strong>生态低碳性：</strong>EEQ记忆整理工艺严格规范节能减排，全程采用生态原料，与您共创低碳生活。 </span>',
+            'qdtd':'<span> <strong>Q:经EEQ作用，衣物纤维产生特殊分子通道，这里的特殊分子通道具体表现在哪里？</strong><br/> A: “特殊分子通道”是指衣物纤维在瞬间高低温作用下，分子剧烈隐秘的活动形成结合位点，使成衣免烫效果不受洗涤次数影响，恒久保持衣物平整度。 <br/><strong>Q:乔治白EEQ记忆衬衫与过去各种形式的免烫衬衫的区别？</strong><br/> A: ①大多数免烫衬衫使用“面料”定型技术，接缝部位无法压平，不服贴平挺，成衣平板没灵气，而乔治白EEQ记忆衬衫采用“成衣”定型技术，保证了整件衣服平服不起皱，更具立体感。②大多数免烫衬衫是在面料中添加助剂达到定型的效果，乔治白EEQ记忆整理工艺是通过特殊方式改变衣物纤维的内在结构，在分子间形成交叉记忆，从而达到定型效果。③普通免烫衬衫经过一定次数洗涤，不耐水洗的作用力，逐渐失去免烫效果，乔治白EEQ记忆整理工艺直接作用于纤维分子，让衣物恒久保持自然平服挺括。④普通免烫衬衫限于技术，目前仅适用于棉与棉涤混纺面料，而乔治白的EEQ记忆整理工艺没有技术限制，用途更为广泛。<br/> <strong>Q:乔治白将来会推出EEQ记忆的其他产品吗？</strong><br/> A:乔治白EEQ记忆整理工艺适用于：棉料、毛料、麻料等常用面料。下阶段乔治白将推出更多EEQ记忆系列产品。 </span>' }
+$(function(){
+      var all_left = $('.cate-kj-content').position().left,
+        all_top = $('.cate-kj-content').position().top,
+       all_w = $('.cate-kj-content .head').outerWidth(),
+       its_r = all_left + all_w + 50;
+       //alert(its_r)
+       $('body').append('<img id="r_pic" src="{% static 'cms/default/images/eqq.png'%}" style="display:none" />');
+       $('#r_pic').css({'position':'absolute', 'top':all_top - 50,  'left':its_r + 100, 'z-index':999});
+       $('#r_pic').fadeIn(3900)
+       //alert($('#r_pic').attr('src'));
+
+
+    chgCtnt($('#gyjj'));
+    $('.sec').on('click', function(){
+        chgCtnt($(this));
+      })
+    function chgCtnt(obj){
+        var dmark = obj.attr('mark');
+        var str  = data[dmark];
+        $('.sec').css({'color':'#666','background':''});
+        obj.css({'color':'#fff','background':'#009966'});
+        $('.scroll-content').html('');
+        $('.scroll-content').html(str);
+    }
+    })
+</script>
+  {% endblock %}

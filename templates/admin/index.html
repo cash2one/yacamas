@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="Description" content="">
+    <title>后台管理--乔治白服饰济南公司</title>
+    <style type="text/css">
+      body,iframe,div,span,ul,li,h1,h2,h3,h4,h5,h6{
+        margin:0;
+        padding:0;
+      }
+      body{
+        overflow:hidden;
+        min-with:600px;
+      }
+      .fl{
+        float:left;
+      }
+      .fr{
+        float:right;
+      }
+      .clr{
+        clear:both;
+      }
+      .div2tab::before,
+      .div2tab::after{
+        display:table;
+      }
+      .div2tabcell{
+        display:table-cell;
+      }
+      .top-level-box{
+        width:100%;
+      }
+      .font-gray{color:#666}
+      .font-light-gray{color:#aaa}
+      .cursor-pointer{cursor:pointer}
+      .font-green{color:#009966}
+      .font-dark-green{color:#007755}
+      .hidden{display:none}
+/**
+ header css
+ **/
+      #header{
+        height:70px;
+        background:#009966;
+      }
+      #header .logo{
+        width:189px;
+      }
+      #header .logo img{width:109px; display:block; font-size:12px}
+      #header .logo span{diaplay:block; color:#fff; margin-left:30px;
+        font-size:14px; font-family:'宋体'}
+      #header .uinfo{
+        font-size:14px;
+        color:#fff;
+        line-height:90px;
+        width:259px;
+      }
+      #header .uinfo a{color:#fff; font-weight:bold; text-decoration:none}
+      #header .uinfo a:hover{color:#fff; font-weight:bold;
+        text-decoration:underline}
+      #header .uinfo i:hover{color:#fff}
+
+/**
+ main body css
+ **/
+      #main{
+        min-width:900px;
+      }
+      #main .left{ 
+        position:absolute;
+        width:189px;
+        background:#ddd;
+        border-right:1px solid #ccc;
+        height:800px;/**/
+      }
+      #main .right{
+        margin-left:190px;
+        background:#f2f2f2;
+      }
+      #main .tabs{overflow:hidden; border-bottom:1px solid #ddd}
+      #main .tabs ul{
+        list-style:none;
+      }
+      #main .tabs .crnt-tab{color:#009966;background:#aaddbb}
+      #main .tabs li{
+        display:block;
+        float:left;
+        padding: 5px 10px;
+        line-height:30px;
+        border-left:1px solid #eee;
+        border-right:1px solid #ccc;
+        border-bottom:1px solid #ccc;
+        border-top:1px solid #eee;
+        background:#e6e6e6;
+        color:#888;
+        width:126px;
+        text-align:center;
+        cursor:default;
+      }
+      #main .tabs .open-close-ico{cursor:pointer}
+      #main .tab i{cursor:pointer}
+      #main .tab i:hover{color:#009966}
+      #main .tab:hover{background:#aaddbb}
+      .main-frame{
+        height:500px;
+      }
+      .main-frame iframe{
+        overflow:auto;
+        margin:0px;
+      }
+
+      .menu li{
+        display:block;
+        border-top:1px solid #e6e6e6;
+        border-bottom:1px solid #d2d2d2;
+      }
+      .menu #back-index{border-top:none;padding-left:20px}
+      .menu a{
+        line-height:30px;
+        padding:5px 0px;
+        display:block;
+        font-size: 15px;
+        text-decoration:none;
+        color:#777;
+        border-top:1px solid blue；
+      }
+      .menu a:hover{
+        background:#eee;
+        color:#009966;
+      }
+      .menu .top span{
+        display:block;
+        padding-left:20px;
+      }
+      .menulevel2 span{
+        display:block;
+        padding-left:40px;
+      }
+      .menulevel2 a{background:#e8e8e8}
+   </style>
+      {% load staticfiles %}
+   <script src="{% static 'cms/default/js/jquery.min.1.11.3.js' %}"></script>
+   <link href="{% static 'pub/fontawesome30/css/font-awesome.min.css' %}" rel="stylesheet" />
+   <!--[ if IE 7]>
+   <link href="{% static 'pub/fontawesome30/css/font-awesome.min.css' %}" rel="stylesheet" />
+   <![endif]-->
+    <script></script>
+  </head>
+  <body>
+    <div id="header" class="top-level-box">
+      <div class="logo fl"> <img src="{% static 'cms/default/images/logo-touming.png' %}" />
+        <span>
+      后台管理
+    </span>
+      </div>
+      <div class="shortcut fl"></div>
+      <div class="uinfo fr">
+        {% if user.username %}
+        <a href="{% url 'admin:user_act' action='info' %}?uid={{user.id}}"><i class="icon-user icon-large  cursor-pointer
+            font-dark-green"></i></a>&nbsp; 欢迎你，<a href="{% url 'admin:user_act' action='info' %}?uid={{user.id}}">{{user.username}}</a>
+
+        ! &nbsp; &nbsp; <a href="{% url 'logout' %}" id="logout">退出</a>
+        {% else %}
+        请 <a href="">登录</a> 后操作！
+        {% endif %}
+      </div>
+    </div>
+    <div id="main" class="top-level-box div2tab">
+      <div class="left">
+        <ul class="menu">
+          <li class="menulevel2"> 
+          <a style="background:#eee" id="back-index" _src="{% url 'admin:summary' %}" href="javascript:void(0);">
+            <span style="padding-left:0px;color:#009966; " ><i class="icon-home icon-large"></i>&nbsp; 后台首页</span></a></li>
+        </ul>
+        <ul class="menu">
+          <li class="top"><a href="javascript:void(0);"><span><i class="icon-th icon-large"></i>&nbsp; 内容管理</span></a></li>
+          <ul class="menu menulevel2">
+            <li><a _src="{% url 'admin:archive_act' action='add' %}"
+              href="javascript:void(0);"><span><i class="icon-edit
+                  font-dark-green"></i>&nbsp; 添加内容</span></a></li>
+          </ul>
+          <ul class="menu menulevel2">
+            <li><a _src="{% url 'admin:archive_act' action='list' %}"
+              href="javascript:void(0);"><span><i class="icon-list-ul font-dark-green"></i>&nbsp; 管理内容</span></a></li>
+          </ul>
+          <ul class="menu menulevel2">
+            <li><a _src="{% url 'admin:category_act' action='add' %}"
+              href="javascript:void(0);"><span><i class="icon-circle-blank"></i>&nbsp; 添加分类</span></a></li>
+          </ul>
+          <ul class="menu menulevel2">
+            <li>
+              <a _src="{% url 'admin:category_act' action='list' %}" href="javascript:void(0)">
+                <span><i class="icon-circle-blank"></i>&nbsp; 管理分类</span>
+              </a>
+            </li>
+          </ul>
+        </ul>
+        <ul class="menu">
+          <li class="top"><a href="javascript:void(0);"><span><i class="icon-list icon-large"></i>&nbsp; 菜单管理</span></a></li>
+          <ul class="menu menulevel2">
+            <li><a _src="{% url 'admin:menu_act' action='add' %}?mtype=front"
+              href="javascript:void(0);"><span><i class="icon-circle-blank"></i>&nbsp; 添加前台菜单</span></a></li>
+          </ul>
+          <ul class="menu menulevel2">
+            <li><a _src="{% url 'admin:menu_act' action='list' %}?mtype=front" href="javascript:void(0);"><span><i class="icon-circle-blank"></i>&nbsp; 管理前台菜单</span></a></li>
+          </ul>
+          <!--
+         <ul class="menu menulevel2">
+            <li><a _src="{% url 'admin:menu_act' action='add' %}?mtype=back" href="javascript:void(0);"><span>添加后台菜单</span></a></li>
+          </ul>
+          <ul class="menu menulevel2">
+            <li><a _src="{% url 'admin:menu_act' action='list' %}?mtype=back" href="javascript:void(0);"><span>管理后台菜单</span></a></li>
+          </ul>
+          -->
+       </ul>
+
+        <ul class="menu">
+          <li class="top"><a  href="javascript:void(0);"><span><i class="icon-cogs icon-large"></i>&nbsp; 系统设置</span></a></li>
+          <ul class="menu menulevel2">
+            <li><a _src="{% url 'admin:sysInfo_act' action='add' %}?key=siteInfo" href="javascript:void(0);"><span><i class="icon-circle-blank"></i>&nbsp; 网站基本信息</span></a></li>
+          </ul>
+          <ul class="menu menulevel2">
+            <li><a _src="{% url 'admin:sysInfo_act' action='add' %}?key=siteSeo" href="javascript:void(0);"><span><i class="icon-circle-blank"></i>&nbsp; 网站SEO信息</pan></a></li>
+          </ul>
+        </ul>
+        <ul class="menu">
+          <li class="top"><a  href="javascript:void(0);"><span><i class="icon-user icon-large"></i>&nbsp; 用户管理</span></a></li>
+          <ul class="menu menulevel2">
+            <li><a _src="{% url 'admin:user_act' action='add' %}" href="javascript:void(0);"><span><i class="icon-circle-blank"></i>&nbsp; 添加用户</span></a></li>
+          </ul>
+          <ul class="menu menulevel2">
+            <li><a _src="{% url 'admin:user_act' action='list' %}" href="javascript:void(0);"><span><i class="icon-circle-blank"></i>&nbsp; 管理用户</span></a></li>
+          </ul>
+          <ul class="menu menulevel2">
+            <li><a _src="{% url 'admin:user_act' action='info' %}?uid={{user.id}}" {#crunt_user_id# } href="javascript:void(0);"><span><i class="icon-circle-blank"></i>&nbsp; 当前用户设置</span></a></li>
+          </ul>
+          <!--
+          <ul class="menu menulevel2">
+            <li><a _src="{% url 'admin:user_act' action='super' %}" href="javascript:void(0);"><span><i class="icon-circle-blank"></i>&nbsp; 超级管理员</span></a></li>
+          </ul>
+          -->
+        </ul>
+        <ul class="menu">
+          <li class="top"><a  href="javascript:void(0);"><span><i class="icon-group icon-large"></i>&nbsp; 权限组管理</span></a></li>
+          <ul class="menu menulevel2">
+            <li><a _src="{% url 'admin:group_act' action='add' %}" href="javascript:void(0);"><span><i class="icon-circle-blank"></i>&nbsp; 添加权限组</span></a></li>
+          </ul>
+          <ul class="menu menulevel2">
+            <li><a _src="{% url 'admin:group_act' action='list' %}" href="javascript:void(0);"><span><i class="icon-circle-blank"></i>&nbsp; 管理权限组</span></a></li>
+          </ul>
+        </ul>
+        <!--
+        <ul class="menu">
+          <li class="top"><a href="javascript:void(0);"><span><i class="icon-legal icon-large"></i>&nbsp; 扩展工具</span></a></li>
+          <ul class="menu menulevel2">
+            <li><a _src="" href="{% url 'admin:tools_act' action='dataexport' %}"><span><i class="icon-circle-blank"></i>&nbsp; 数据库备份</span></a></li>
+          </ul>
+          <ul class="menu menulevel2">
+            <li><a _src="{% url 'admin:tools_act' action='dataimport' %}"
+              href="javascript:void(0);"><span><i class="icon-circle-blank"></i>&nbsp; 数据库导入</span></a></li>
+          </ul>
+        </ul>
+        -->
+      </div>
+      <div class="right">
+        <div class="tabs">
+          <ul>
+            <li class="tab" style="display:none" id="tab-tpl">
+              <span></span> <i class="font-gray close-icon icon-remove fr"></i>
+            </li>
+            <li class="tab crnt-tab" id="tab-index"  src='{% url 'admin:summary' %}' ><span>后台首页</span></li>
+          </ul>
+        </div>
+        <div id="main-frame" class="main-frame">
+          <iframe height="100%" width="100%" src="/manage/summary/" frameborder="0"></iframe>
+        </div>
+      </div>
+    </div>
+    <div id="footer" class="top-level-box"></div>
+    <script>
+      $(function($){
+
+        $('.top').siblings('.menu').hide().end().attr('closed', '1'); 
+        $('.menu li').on('click',function(){
+              var $sub = $(this).children('a'),
+                  $frm = $('#main-frame iframe'),
+                  that = this;
+              //子菜单（二级）
+              if(!$(this).hasClass('top')){
+                  _src  =  $sub.attr('_src');
+                  $('#main-frame iframe').attr('src', _src);
+                  $('.menu li').css({'background':'#ddd'});
+                  $('.menu li').children().css({'color':'#666'});
+                  $(this).css({'background':'#eee'});
+                  $(this).children().css({'color':'#009966'});
+                  // add tab into tabs
+                  var tabTitle = $(this).text(),
+                      src = _src,
+                      $tabs = $('.right .tabs ul'),
+                      $tabList = $('li.tab'),
+                      $crntTab = $('.tabs .crnt-tab'),
+                      $tabTpl  = $('#tab-tpl'),
+                      tabExists = false,
+                      tabCnt = 0,
+                      newTab = $tabTpl.clone().removeAttr('style').removeAttr('id');
+                  // check if newTab exists
+
+                  tabCnt = $tabList.length;
+                  for(i=0 ; i<tabCnt; i++ ){
+                    $t = $($tabList[i]);
+                    tSrc = $t.attr('src');
+                    
+                    //alert(parseInt(i));
+                    if(tSrc == src){
+                      // tab focus
+                      $('.tab').removeClass('crnt-tab');
+                      $t.addClass('crnt-tab');
+                      //$frm.attr('src', src);
+
+                      return false;
+                    }
+                  }
+                  //$crntTab.attr('id', '');
+                  $('.tab').removeClass('crnt-tab');
+                  newTab.children('span')
+                    .text(tabTitle).end()
+                      .addClass('tab crnt-tab')
+                        .attr('src', src);
+                  //alert(newTab.attr('src'));
+                  $tabs.append(newTab);
+
+                  return false;
+                }else{
+                  //alert('top menu');
+                  if($(this).attr('closed') == '1'){
+                      //alert($(this).attr('closed'));
+                      $('.top').siblings('.menu').hide( function(){
+                        $(this).attr('closed', '0'); 
+                      });
+                        $(that).siblings('.menu').show(200);
+                    }else{
+                      //alert($(this).attr('closed'));
+                      $(this).siblings('.menu').hide(200);
+                      $(this).attr('closed', '1'); 
+
+                    }
+                    return false;
+                }
+            }).on('mouseenter', function(){}).on('mouseleave', function(){});
+
+        $('.tabs').on('click', '.tab', function(){
+                    $('.tab').removeClass('crnt-tab');
+                    $(this).addClass('crnt-tab');
+                    //open src
+                    var src = $(this).attr('src');
+                    //alert($(this).html());
+                    $('#main-frame iframe').attr('src', src);
+                    }).on('click', '.tab i', function(e){
+                      var $prev = $(this).parent().prev();
+
+                      //alert($prev.html())
+                      if($(this).parent().hasClass('crnt-tab')){
+                        $('#main-frame iframe').attr('src', $prev.attr('src'));
+                        $('.tab').removeClass('crnt-tab');
+                        $prev.addClass('crnt-tab');
+                      }
+                      $(this).parent().remove();
+                      e.stopPropagation();
+                      });
+        function ifrmInit(){
+            var iframeHeight = $(window).innerHeight()
+                              - $('#header').outerHeight()
+                              - $('#main .right .tabs').outerHeight();
+            //alert(iframeHeight);  
+            $('#main-frame').outerHeight(iframeHeight);
+          }
+        ifrmInit();
+        $(window).on('resize', function(){
+            ifrmInit();
+            })
+        $('.uinfo a').on('click', function(){
+            if($(this).attr('id') != 'logout')
+              $('#main-frame iframe').attr('src', $(this).attr('href'));
+            else
+              location.href = $(this).attr('href');
+            return false; 
+            });
+
+          //$('.menu').children('ul').attr('closed', '1').hide();
+      });
+    </script>
+  </body>
+</html>

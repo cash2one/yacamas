@@ -1,0 +1,50 @@
+{% extends "admin/base.html" %}
+
+{% block tittle %}
+{{ title }}
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block main %}
+<form class="group_add" action="" method="post">
+  <input type="hidden" name="keyId" value="{{keyId}}" />
+  <table class="input">
+    <tr>
+      <th>网站名称</th>
+      <td><input type="text" name="siteName" size="60" value="{{oval.siteName}}"/></td>
+    </tr>
+    <tr>
+      <th>域名</th>
+      <td><input type="text" name="domain" size="60" value="{{oval.domain}}" /></td>
+    </tr>
+    <tr>
+      <th>备案号</th>
+      <td><input type="text" name="icpNum" size="60"  value="{{oval.icpNum}}"/></td>
+    </tr>
+    <tr>
+      <th>邮箱</th>
+      <td><input type="text" name="mail" size="60" value="{{oval.mail}}" /></td>
+    </tr>
+    <tr>
+      <th>统计代码</th>
+      <td><textarea cols=55 rows=6 name="tjcode">{{oval.sitename}}</textarea></td>
+    </tr>
+  </table>
+ <button value="1">提交</button>
+</form>
+<script>
+$(function(){
+  {% autoescape off %}
+  var data={{oval}};
+  {% endautoescape %}
+  if(data){
+    for(i in data){
+      //alert(i);
+      $('td').children('[name='+i+']').val(data[i]);
+    }
+  }
+});
+</script>
+{% endblock %}

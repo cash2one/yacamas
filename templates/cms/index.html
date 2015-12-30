@@ -1,0 +1,25 @@
+{% extends "cms/base.html" %}
+{% block main %}
+  {% load staticfiles %}
+		<div id="main" class="toplvl-box">
+          <div class="content-wrapper">
+			<div id="slider">
+				<span>乔治白•职业装领导者 </span>
+                <br/>
+                Giuseppe<br/>The leader of
+                  Uniform
+			</div>
+			<div class="video">
+
+              <div class="player video-box">
+              <embed src="{% static 'pub/ckplayer/ckplayer.swf' %}"
+                flashvars="f={% static 'cms/default/images/4a.flv' %}&p=0&i={% static 'cms/default/images/video-index-thumb.png' %}" quality="high" width="428" height="229" align="middle" allowScriptAccess="always" allowFullscreen="true" type="application/x-shockwave-flash"></embed>
+              </div>
+				<div style="display:none" class="video-box"><img src="{% static 'cms/default/images/video-dark.jpg' %}" /></div>
+			</div>
+        </div>
+      </div>
+		<div id="bg-wrapper">
+			<img id="bg-all" src="{% static 'cms/default/images/bgbig/11.jpg' %}"  />
+		</div>
+  {% endblock %}

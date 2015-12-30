@@ -1,0 +1,31 @@
+{% extends "admin/base.html" %}
+
+{% block tittle %}
+  乔治白--extended tittle 
+{% endblock %}
+
+{% block header %}
+{% load staticfiles %}
+<script type="text/javascript" charset="utf-8" src="{% static 'pub/umeditor1.2.2/umeditor.config.js' %}"></script>
+<script type="text/javascript" charset="utf-8" src="{% static 'pub/umeditor1.2.2/umeditor.min.js' %}"></script>
+<link  rel="stylesheet" charset="utf-8" href="{% static 'pub/umeditor1.2.2/themes/default/css/umeditor.min.css' %}" />
+<script type="text/javascript" charset="utf-8" src="{% static 'pub/umeditor1.2.2/lang/zh-cn/zh-cn.js' %}"></script>
+{% endblock %}
+ 
+{% block main %}
+{{ form.errors }}
+<form action="" method="post" enctype="multipart/form-data">
+  {{form}}
+</form>
+<script>
+$(function(){
+    // 用户选择 作者
+    $('select#user_select').on('change',function(){
+        var new_author = $(this).children('option[value='+$(this).val()+']').text(); 
+        $(this).siblings('input[name=author]').val(new_author);
+      });
+    })
+/*****  初始化编辑器  ****/
+var um = UM.getEditor('container');
+</script>
+{% endblock %}

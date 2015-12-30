@@ -1,0 +1,55 @@
+{% extends "admin/base.html" %}
+
+{% block tittle %}
+  乔治白--extended tittle 
+{% endblock %}
+
+{% block header %}
+    <style type="text/css">
+    table{width:500px;border:none}
+    td a{color:#009966; font-size:16px}
+    
+   </style>
+{% endblock %}
+
+{% block main %}
+<table class="input" border=0>
+  <tr>
+    <th>登录名：</td>
+    <td>{{ oUser.username }}</td>
+  </tr>
+  <tr>
+    <th>别名：</td>
+    <td>{{ oUser.first_name }}</td>
+  </tr>
+  <tr>
+    <th>是否管理员：</td>
+    <td>{% if oUser.is_superuser %} 
+     是
+     {% else %}
+      否
+     {% endif %}
+    </td>
+  </tr>
+  <tr>
+    <th>所属用户组：</td>   
+    <td>
+      {% for g in groupList %}
+      {{ g }}&nbsp; 
+      {% endfor %}
+    </td>
+  </tr>
+  <tr>
+    <th>创建时间：</td>
+    <td>{{ oUser.date_joined }}</td>
+  </tr>
+  <tr>
+    <th>最后登录：</td>
+    <td>{{ oUser.last_login }}</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><a href="{% url 'admin:user_act' action='edit' %}?uid={{ oUser.id }}">修改</a></td>
+  </tr>
+</table>
+{% endblock %}

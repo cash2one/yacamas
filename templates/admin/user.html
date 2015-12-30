@@ -1,0 +1,63 @@
+{% extends "admin/base.html" %}
+
+{% block tittle %}
+  乔治白--extended tittle 
+{% endblock %}
+
+{% block header %}
+  
+{% endblock %}
+{% block main %}
+<table>
+  <tr>
+    <th>用户名</th>
+    <th>是否可用</th>
+    <th>别名</th>
+    <th>是否管理员</th>
+    <th>操作</th>
+  </tr>
+  {% for o_user in rs %}
+  <tr>
+    <td>{{ o_user.username }}</td>
+    <td>{{ o_user.is_active}}</td>
+    <td>{{ o_user.first_name}}</td>
+    <td>{{ o_user.is_superuser}}</td>
+    <td>
+      <a href="{% url 'admin:user_act' action='edit' %}?uid={{o_user.id}}">编辑</a>
+      | 
+      {% if o_user.is_staff %}
+      <a class="active" href="{% url 'admin:user_act' action='firbid' %}?uid={{o_user.id}}">禁用</a>
+      |
+      <a class="premission" href="{% url 'admin:user_act' action='premission' %}?uid={{o_user.id}}">用户授权</a>
+      {# TODO: 用户授权业务逻辑未编写  白名单--> user_act.user_premission #}
+      {% else %}
+      <a class = "inactive" href="{% url 'admin:user_act' action='active' %}?uid={{o_user.id}}">启用</a>
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+<ul class="page">
+<a href="javascript:void()" pn="1"><li>首页</li></a>
+<a href="javascript:void()" pn="{{p_prev}}"><li>上一页</li></a>
+{% for p in p_list %}
+<a href="javascript:void();" 
+  {% if pn == p %}
+    class="current_page" 
+  {%endif%}
+  pn="{{p}}"><li>{{p}}</li></a>
+{% endfor %}
+<a href="javascript:void()" pn="{{p_next}}"><li>下一页</li></a>
+<a href="javascript:void()" pn="{{p_total}}"><li>末页</li></a>
+<form action="" method="post"><input type="hidden" name='pn' value="1"> </form>
+</ul>
+<script>
+  $(function(){
+    $('.page a').on('click', function(){
+      $('.page input').val($(this).attr('pn'));
+      $('.page form').submit();
+      return false;
+    }) 
+  })
+</script>
+{% endblock %}

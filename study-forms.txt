@@ -1,0 +1,156 @@
+"""
+学习django.forms
+"""
+
+## 绑定与非绑定
+  #绑定： 
+  form = MyForm(data) ## 实例化时传入“字典“数据即为“绑定“
+  data为MyForm中定义的字段及对应的值的“字典“
+  和数据绑定的form可以对数据进行验证，且可将绑定的数据随html渲染
+  #非绑定： 
+  form = MyForm() ##实例化空的自定义form 即为“非绑定“
+  不能验证数据（因为没有数据），但可以渲染空白html
+
+## API
+
+  #---------------- 数据验证 -----------------#
+  form.clean() # 验证执行
+  form.errors  # {'sender': ['Enter a valid email address.'], 'subject': ['This field is required.']}
+  form.errors.as_data  # {'sender': [ValidationError(['Enter a valid email address.'])], 'subject': [ValidationError(['This field is required.'])]}
+  form.errors.as_json  # {"sender": [{"message": "Enter a valid email address.", "code": "invalid"}], "subject": [{"message": "This field is required.", "code": "required"}]}
+  form.add_error(field, err) 
+    # field: 字符串-fieldname  若为None 则添加 "non_field_error" -- form.non_field_error()
+    # err: 字符串，或ValidationError 实例
+  form.has_error(field, code=None)
+    # 检查是否有（特定code）的错误
+    # 若检查non_field_error 设field=non_field_error
+  form.non_field_errors()
+    # 返回无关特定field的form.errors列表。包含
+    # form.clean()中的ValidationErrors 和 form.add_error(field,
+    # code=None)添加的error
+  非绑定form的行为
+   >> f = MyForm();
+   >> f.is_valid()
+      False
+   >> f.errors
+      {}
+  
+  #------------- 动态初始化 ---------------#
+  form.initial
+
+  #------------- 检测form数据是否改变 --------------#
+  form.has_changed()
+
+  #------------- 访问字段 --------------#
+  form.fields
+  form.fields['fieldname']
+  form.fields.values 
+  form.as_table()
+  form.as_ul()
+  form.as_p()
+    >>> form.as_table().split('\n')[0] # 按字符串处理
+        '<tr><th>Name:</th><td><input name="name" type="text" value="instance" /></td></tr>'
+
+  #------------- Access "clean" data 验证后数据 --------------#
+  form.clean_data
+    >>> data = {....}
+    >>> f = MyForm(data)
+    >>> f.is_valid()
+        True
+    >>> f.clean_data
+        {...}
+    # 所有字符串类型field的data全部返回为unicode（内部自动转码）
+    # 只返回MyForm类中定义的字段（data中包含的其他字段将被过滤掉）
+    # 返回MyForm中定义的所有字段，若data中没有包含则返回 {'key': ''}空值字段
+      “空值“ 是对应字段类型规定的“空“值类型，上面例子是只空字符字段
+      如：若字段为DateField 则为{'key': None}
+    # 可以验证单个字段，也可验证整个form。参见：
+      https://docs.djangoproject.com/en/1.8/ref/forms/validation/
+      
+  #------------- 输出html 表单--------------#
+  输出空表单
+    f = MyForm()
+    print(f)
+  
+  输出带默认值的表单
+    f = MyForm(data)
+    print(f) # 字段的value属性填上data中给出的默认值
+
+  输出形式： （返回字符串，可以继续使用字符串处理函数进行加工）
+  form.as_table()
+    # tr>th>label[for="id_fieldname"]+td>input#id_fieldname
+  form.as_ul()
+    # li>label[for="id_fieldname"]{fieldname}+input#id_fieldname
+  form.as_p()
+    # p>label[for="id_fieldname"]{fieldname}+input#id_fieldname
+
+  #------------- 表单样式 --------------#
+  error_css_class
+  required_css_class
+  f['fieldname'].label_tag(attrs={'attr': val})
+    from django.forms import Form
+
+    class ContactForm(Form):
+        error_css_class = 'error'
+        required_css_class = 'required'
+
+        # ... and the rest of your fields here
+    Once you’ve done that, rows will be given "error" and/or "required" classes, as needed. The HTML will look something like:
+
+    >>> f = ContactForm(data)
+    >>> print(f.as_table())
+    <tr class="required"><th><label class="required" for="id_subject">Subject:</label>    ...
+    <tr class="required"><th><label class="required" for="id_message">Message:</label>    ...
+    <tr class="required error"><th><label class="required" for="id_sender">Sender:</label>      ...
+    <tr><th><label for="id_cc_myself">Cc myself:<label> ...
+    >>> f['subject'].label_tag()
+    <label class="required" for="id_subject">Subject:</label>
+    >>> f['subject'].label_tag(attrs={'class': 'foo'})
+    <label for="id_subject" class="foo required">Subject:</label>
+      
+  #------------- 定制id --------------#
+  默认id为： id_fieldname
+  form.auto_id
+    默认为auto_id=True
+    # 设auto_id为False: 表单不包含 label标签和id
+      f = MyForm(auto_id=False)
+   
+    # 设auto_id为False: 表单包含 label标签和id
+      f = MyForm(auto_id=True) 
+    
+    f = MyForm(auto_id=True) 
+    f = MyForm(auto_id=False) 
+    f = MyForm(auto_id='id_somestr_%s') # id="id_somestr_fieldname" 且有label 
+    f = MyForm(auto_id='id_somestr_%s', label_suffix='') #label_suffix label名称后面的符号默认为冒号： ， 可定制 
+
+  #------------- 错误显示 --------------#
+  显示：
+    默认在label前加<ul class="errorlist"><li>error msg</li></ul>fieldname
+
+  
+  #------------- 更细粒度控制显示 --------------#
+  通过MyForm的实例引用获取字段
+  f = MyForm()
+  bdf = MyForm(data)
+
+  f.fieldname
+  bdf['fieldname'] # 不能在模版中使用{{ bdf['fieldname'] }}
+  bdf.fieldname
+
+  bdfield = bdf.fieldname # 绑定form的字段实例
+  bdfield.errors
+  bdfield.label_tag(content=None, attrs=None, label_suffix=None)
+  bdfield.css_classes() # 获取字段css 应该绑定为绑定都可获取 
+  bdfield.value() # 获取绑定（传入data）非绑定（传入initial=dictdata)的字段值
+  bdfield.id_for_label # <label for="{{ form.my_field.id_for_label }}">...</label>{{ my_field }}
+    
+  #------------- 绑定uploadfile to form --------------#
+  # TODO: 这个放在需要的时候再学吧
+
+  ################# 关于form提交数据的预处理 ####################
+  方法：
+      overridde django.forms 的clean()方法。
+  步骤：
+      # 自定义form  --MyForm
+      # 写clean方法 --Myform.clean()
+      # 

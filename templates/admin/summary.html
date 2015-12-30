@@ -1,0 +1,91 @@
+{% extends "admin/base.html" %}
+
+{% block tittle %}
+  乔治白--extended tittle 
+{% endblock %}
+
+{% block header %}
+    <style type="text/css">
+ 
+      .main{
+        width:100%;
+        height:100%;
+      }
+      .main .cate{
+        margin:20px;
+
+      }
+      .clr{clear:both}
+      ul,li{list-style:none}
+      .main .cate .title{
+        background:#dedede;
+        border:0px solid #bbb;
+        margin-bottom:20px;
+        border-radius:5px;
+        font-size:16px;
+        color:#009966;
+        padding:15px 20px;      }
+      .main .cate .box{font-size:14px;padding:20px; color:#666}
+      .main .cate .box li{ float:left; width:auto;margin:20px 50px;
+        text-align:center}
+      .main .cate .box a{text-decoration:none;font-size:17px; color:#666}
+      .main .cate .box a:hover{color:#007755}
+      .main .cate .box i{color:#aaa; cursor:pointer; font-size:79px}
+      .main .cate .box i.green{color:#009966; cursor:pointer; font-size:79px}
+      .main .cate .box i:hover{color:#007755; cursor:pointer}
+      
+      .info-item{display:block;padding:10px 0px}
+    </style>
+{% endblock %}
+
+{% block main %}
+      <!--
+      <div class="msg cate">
+        <div class="title"><i class="icon-edit icon-lightbulb  green"></i> 系统通知</div>
+        <div class="box">暂无通知</div>
+      </div>
+      -->
+      <div class="info cate">
+        <div class="title"><i class="icon-edit icon-external-link  green"></i> 快捷方式</div>
+        <div class="box">
+          <ul>
+            <li class="shortcut"><a href="{% url 'admin:archive_act' action='add' %}"><i class="icon-edit icon-4x green"></i>
+              <br/>添加文章</a> &nbsp;  &nbsp;  </li>
+            <li class="shortcut"><a href="{% url 'admin:archive_act' action='list' %}"><i class="icon-list-ul icon-4x"></i>
+              <br/>管理文章</a> &nbsp; </li>
+            <li class="shortcut"><a href="{% url 'admin:user_act' action='info' %}?uid={{user.id}}"><i class="icon-user icon-4x"></i>
+              <br/>当前用户</a></li>
+            <li class="shortcut"><a href="{% url 'admin:sysInfo_act' action='add' %}?key=siteInfo"><i class="icon-cog icon-4x"></i>
+              <br/>网站信息</></a></li>
+          </ul>
+          <div class="clr"></div>
+        </div>
+      </div>
+      <div class="pannle cate">
+        <div class="title"><i class="icon-edit icon-bar-chart  green"></i> 系统概况</div>
+        <div class="box">
+          {{request.session}} &nbsp;  <span style="color:#009966;
+            font-weight:bold">当前时间： </span>
+         <table  style="border:none">
+           <tr>
+             <td style="border:none">
+               <span class="info-item">栏目（分类）数量：</span>
+         <span class="info-item">文章数量：</span>
+         <span class="info-item">用户数量：人</span>
+         <span class="info-item">当前用户：</span>
+         <span class="info-item">IPC备案号：</span>
+             </td>
+             <td style="border:none">
+         <span class="info-item">操作系统：</span>
+         <span class="info-item">CPU：</span>
+         <span class="info-item">内存：</span>
+         <span class="info-item">内存用量：</span>
+         <span class="info-item">硬盘容量：</span>
+             </td>
+           </tr>
+         </table>
+         
+         
+        </div>
+      </div>
+{% endblock %}

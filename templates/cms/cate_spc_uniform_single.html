@@ -1,0 +1,7 @@
+{% extends "cms/base.html" %}
+{% block main %}
+  {% load staticfiles %}
+  {% autoescape off %}
+{{ o_arch.content }}	
+  {% endautoescape %}
+  {% endblock %}

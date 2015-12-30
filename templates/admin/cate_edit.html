@@ -1,0 +1,56 @@
+{% extends "admin/base.html" %}
+
+{% block tittle %}
+{{ title }}
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block main %}
+<form class="group_add" action="" method="post">
+  <input type=hidden name="cid" value="{{oCate.id}}" />
+  <table class="input">
+     <tr>
+      <th>分类类型：</th>
+      <td>
+        {{ form.cate_type }}
+      </td>
+    </tr>
+    <tr>
+      <th>上级分类：</th>
+      <td>
+        <select name="pid">
+          <option value="-1"> --- 选择 --- </option>
+          <option value="0"> 作为一级分类 </option>
+          {% for opt in cate_tree_select %}
+            {% autoescape off %}
+            {{opt}}
+            {% endautoescape %}
+          {% endfor %}
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th>分类名称：</th>
+      <td>
+        <input type="text" name="name" size="30"  value="{{oCate.name}}"/></td>
+    </tr>
+    <tr>
+      <th>分类别名：</th>
+      <td>
+        <input type="text" name="alias" size="30" value="{{oCate.alias}}" /></td>
+    </tr>
+  </table>
+  <button name="do_submit" value="1">提交</button>
+</form>
+<script>
+$(function(){
+  var pid={{oCate.pid}},
+      type='{{oCate.cate_type}}';
+  $('select[name=pid]').children('[value='+pid+']').attr('selected', 'selected');
+  $('#id_cate_type option').removeAttr('selected');
+  $('#id_cate_type option[value='+type+']').attr('selected', 'selected');
+      });
+</script>
+{% endblock %}

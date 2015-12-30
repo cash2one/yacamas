@@ -1,0 +1,81 @@
+{% extends "admin/base.html" %}
+{% load mytags %}
+{% block tittle %}
+{{ title }}
+{% endblock %}
+
+{% block header %}
+<style type="text/css">
+.top_perm {}
+.perm_ckbox_list .perm_lvl_1{margin-left:30px}
+.perm_ckbox_list .perm_lvl_2 li{margin-left:50px;  color:#aaa; cursor:pointer}
+.perm_ckbox_list .perm_lvl_3 li{width:139px;color:#333; display:block; float:left}
+</style>
+{% endblock %}
+
+{% block main %}
+<form class="group_add" action="" method="post">
+  <table class="input">
+    <tr>
+      <th>组名称：</th>
+      <td>{{form.name}}</td>
+    </tr>
+  </table>
+  <div class="perm_list">
+    <div class="title">添加权限：</div>
+    <ul class="perm_ckbox_list">
+    {% for appname, oapp in perm_dict.items %}
+      <li>
+        <ul class="perm_lvl_1">
+          <li><!-- <input  class="perm_app_ckbox"  type="checkbox"/>--> {{appname|_e:appname}}</li>
+          {% if oapp %}
+            {% for modelname, perms in  oapp.models.items %}
+          <li>
+            <ul class="perm_lvl_2">
+              <li><!--- <input  class="perm_model_ckbox"  type="checkbox"/> --> [模型] {{ modelname|_e:modelname }}</li>
+              <li>
+                <ul class="perm_lvl_3">
+                      {% for perm in perms%} 
+                  <li>
+                    <input  class="perm_ckbox" name="perm" type="checkbox"
+                    {% if perm.id in group_perms%}
+                    checked = true
+                    {% endif %}
+                    value="{{perm.id}}" /> {{perm.name|_e_space_no_en:''}}  
+                  </li>
+                      {% endfor %}
+                </ul>
+              <li style="clear:both"></li>
+            </ul>
+          </li>
+          {% endfor %}
+        {%endif%}
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
+
+  </div>
+  <button name="do_submit" value="1">添加</button>
+</form>
+<script>
+$(function(){
+   /****
+    * TODO: 权限列表的点击动作
+    */
+  
+   // $('ul.perm_lvl_3 li').on('click', function(){
+   //    $ckbox = $(this).children('input[type=checkbox]');
+   //    checked = $ckbox.attr('checked');
+   //    if(checked != undefined){
+   //       $ckbox.removeAttr('checked');
+
+   //    }else{
+   //       $ckbox.attr('checked', true);
+   //       alert('check it' + $ckbox.attr('checked'  ));
+   //    }
+   //   })
+
+    });
+</script>
+{% endblock %}

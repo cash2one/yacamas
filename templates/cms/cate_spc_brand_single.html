@@ -1,0 +1,29 @@
+{% extends "cms/base.html" %}
+{% block main %}
+  {% load staticfiles %}
+		<div id="main" class="toplvl-box"> 
+			<div class="cate-content"> 
+				<div class="content-lft">
+					<div class="head">职业装<br/><span> GIUSEPPE UNIFORM</span></div>
+					<div class="main">
+						<div class="scroll-content content">
+{% autoescape off %}
+{{ o_arch.content }}	
+{% endautoescape %}
+                       </div>
+					</div>
+					<div class="foot"><span class="up scroll-nrw">&nbsp;</span><span class="down scroll-nrw">&nbsp;</span></div>
+				</div>
+				<div class="content-rgt">
+					<div class="cate-thumb" id='cate-thumb-1'></div>
+					<div class="cate-thumb" id='cate-thumb-2'></div>
+					<div class="cate-thumb" id='cate-thumb-3'></div>
+					<div class="cate-thumb" id='cate-thumb-4'></div>
+				</div>
+			</div>
+		</div>
+	<div id="bg-wrapper">
+			<img id="bg-all" style="display:none;width:100%;" src="{% static 'cms/default/images/bgbig/17.jpg' %}"  />
+		</div>
+
+  {% endblock %}

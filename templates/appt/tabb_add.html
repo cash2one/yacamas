@@ -1,0 +1,32 @@
+{% extends "admin/base.html" %}
+
+{% block tittle %}
+  乔治白--extended tittle 
+{% endblock %}
+
+{% block header %}
+{% load staticfiles %}
+<script type="text/javascript" charset="utf-8" src="{% static 'pub/umeditor1.2.2/umeditor.config.js' %}"></script>
+<script type="text/javascript" charset="utf-8" src="{% static 'pub/umeditor1.2.2/umeditor.min.js' %}"></script>
+<link  rel="stylesheet" charset="utf-8" href="{% static 'pub/umeditor1.2.2/themes/default/css/umeditor.min.css' %}" />
+<script type="text/javascript" charset="utf-8" src="{% static 'pub/umeditor1.2.2/lang/zh-cn/zh-cn.js' %}"></script>
+{% endblock %}
+ 
+{% block main %}
+{{ form.errors }}
+<form action="" method="post" enctype="multipart/form-data">
+  <table>
+    <tr>
+      <th>path</th>
+      <td><input type="text" name="path" /></td>
+    </tr>
+    <tr>
+      <th>file name</th>
+      <td><textarea name="file_name"></textarea></td>
+    </tr>
+  </table>
+  <input type="submit" value="Submit" />
+</form>
+<script>
+</script>
+{% endblock %}

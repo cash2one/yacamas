@@ -1,0 +1,52 @@
+{% extends "cms/base.html" %}
+  {% load staticfiles %}
+    {% block header %}
+       <link href="{% static 'pub/fontawesome30/css/font-awesome.min.css' %}" rel="stylesheet" />
+       <!--[ if IE 7]>
+       <link href="{% static 'pub/fontawesome30/css/font-awesome.min.css' %}" rel="stylesheet" />
+       <![endif]-->
+    {% endblock %}
+
+{% block main %}
+		<div id="main" class="toplvl-box"> 
+			<div class="content-wrapper about"> 
+				<div class="lft">
+                  <div></div>
+                    <ul>
+                    {% for arch in arch_list %}
+                    <li>
+                    <a  {% if arch.id == o_arch.id %} class="crnt" {% endif %}href="/cms/?m={{m_lower}}&aid={{arch.id}}">
+                        <i class="icon-caret-right"></i> {{arch.title}}
+                      </a>
+                    </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+				<div class="rgt">
+                  <div class="head">
+                    <h1><a href="">{{o_arch.title}}</a></h1>
+					<span class="up scroll-nrw">&nbsp;</span><span class="down scroll-nrw">&nbsp;</span>
+                  </div>
+					<div class="main">
+						<div class="scroll-content content">
+
+{% autoescape off %}
+{{ o_arch.content }}	
+{% endautoescape %}
+                    	</div>
+					</div>
+                    <div class="foot">
+                    </div>
+				</div>
+			</div>
+            <div id="corner-r"></div>
+            <div id="corner-l"></div>
+		</div>
+	<div id="bg-wrapper">
+			<img id="bg-all" style="display:none" src="{% static 'cms/default/images/bgbig/a1411.jpg' %}"  />
+		</div>
+        <script>
+        </script>
+  {% endblock %}
+  {% block footer %}
+  {% endblock %}

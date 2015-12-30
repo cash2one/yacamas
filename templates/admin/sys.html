@@ -1,0 +1,34 @@
+{% extends "admin/base.html" %}
+
+{% block tittle %}
+  乔治白--extended tittle 
+{% endblock %}
+
+{% block header %}
+    <style type="text/css">
+      body,iframe,div,span,ul,li,h1,h2,h3,h4,h5,h6{
+        margin:0;
+        padding:0;
+      }
+ 
+      .main{
+        width:100%;
+        height:100%;
+        background:#00ffee;
+      }
+      .main .cate{
+        background:#ccc;
+        margin-bottom:20px;
+        margin:20px;
+      }
+    </style>
+{% endblock %}
+
+{% block main %}
+    <div class="main">
+      <div class="msg cate">系统通知</div>
+      {{ act }}
+      <div class="info cate">系统信息</div>
+      <div class="pannle cate">控制面板</div>
+    </div>
+{% endblock %}

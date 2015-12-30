@@ -1,0 +1,42 @@
+{% extends "admin/base.html" %}
+
+{% block tittle %}
+  乔治白--extended tittle 
+{% endblock %}
+
+{% block header %}
+  
+{% endblock %}
+{% block main %}
+<table>
+  {% for o_permission in rs %}
+  <tr>
+    <td>{{ o_permission.id }}</td>
+    <td>{{ o_permission.name }}</td>
+    <td>{{ o_permission.codename }}</td>
+    <td>{{ o_permission.content_type }}</td>
+    <td>
+      <!--{# 不能编辑 因为若已经有地方使用该权限了 修改里codename将导致不可预期后果 #}
+      <a href="{% url 'admin:permission_act' action='edit' %}?gid={{o_permission.id}}">编辑</a>
+      | 
+      -->
+      <a href="{% url 'admin:permission_act' action='del' %}?gid={{o_permission.id}}">删除</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+<ul class="page">
+<a href="{% url 'admin:permission_act' action='list' %}"><li>首页</li></a>
+<a href="{% url 'admin:permission_act' action='list' %}?pn={{p_prev}}"><li>上一页</li></a>
+{% for p in p_list %}
+<a href="{% url 'admin:permission_act' action='list' %}?pn={{p}}" 
+  {% if pn == p %}
+    class="current_page" 
+  {%endif%}
+  pn="{{p}}"><li>{{p}}</li></a>
+{% endfor %}
+<a href="{% url 'admin:permission_act' action='list' %}?pn={{p_next}}"><li>下一页</li></a>
+<a href="{% url 'admin:permission_act' action='list' %}?pn={{p_total}}"><li>末页</li></a>
+</ul>
+
+{% endblock %}

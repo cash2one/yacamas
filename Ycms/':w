@@ -1,0 +1,73 @@
+@font-face {
+	font-family:qzbnav;
+	src: url('images/font/bodoni.eot')
+}
+@font-face {
+	font-family:qzbnav;
+	src: url('images/font/bodoni.ttf')
+}
+.font-spec{font-family:qzbnav}
+body{background:#111; font-size:62.5%;}
+body,h1,h2,h3,h4,ul,li,span,div,img{border:none; padding:0; margin:0; }
+div{overflow: hidden;}
+ul, li{list-style: none;}
+.clr{clear:both;}
+.non-margin{margin-left:0}
+.non-btm-line{border-bottom:none}
+.nav-btm-line{border-bottom: 3px solid #fff;}
+div#top,div#topall, div#main, div#footer {min-width:85em}
+/* top all*/
+div#topall{height:1em; background:url(images/top-all.png)}
+
+/* top */
+div#top{margin-top:2em}
+div#top>div{float:left }
+div#top #logo{width:12em;margin-left:8em}
+  /* nav */
+  div#top #nav{width:auto;padding:1.5em 0 0 6em}
+  div#top #nav>ul{overflow:hidden; border-bottom:1px dotted #ccc}
+  div#top #nav li {display:block; float:left; margin:1em 1em 0em 1em; font-size:1.6em}
+  div#top #nav a{display:block; color:#fff; text-decoration:none}
+  div#top #nav li ul{position:absolute;display:none; }
+  div#top #nav li ul>li{font-size:0.8em}
+  div#top #nav li:hover>ul{display:block;}
+  div#top #nav li:hover{border-bottom:3px solid #fff;}
+  div#top #nav li ul.show{display:block}
+
+/* main */
+div#main .content-wrapper{margin:5em 0 0 13em; width:50em; color:#666}
+  /* slider */
+  div#main .content-wrapper #slider{font-size:2em;padding-bottom:1em ; color:#fff}
+  div#main .content-wrapper #slider span{font-size:1.5em}
+  
+  /* video */
+
+  /* uniform */
+  div#main .content-wrapper.uniform{width:54em}
+  div#main .content-wrapper.uniform .lft{width:39em; border:1px solid red}
+  div#main .content-wrapper.uniform .lft .head{font-size:2em; color:#fff}
+  div#main .content-wrapper.uniform .lft .head span{font-size:1em;}
+  
+
+
+/* bg-all [img]*/
+div#bg-wrapper{width:100%; overflow:hidden; position:fixed; top:0 ; border:0px solid red; left:0; z-index:-999;}
+
+/** footer
+**/
+div#footer{height:auto;}
+div#footer-3-l{float:left; width:100%}
+div#footer-2-l{float:left; width:100%; margin-right:-106px}
+div#footer .lft{float:left;height:90px; width:188px; background:url(images/footer-l.png)}
+div#footer .lft div{height: 30px; width:31px; margin:8px 0px 0px 78px;background:url(images/weixin-weibo.png) -57px 0px no-repeat; cursor:pointer}
+div#footer .lft div:hover{background:url(images/weixin-weibo.png) -11px 0px  no-repeat}
+#footer .mdl{height:90px;border:0px solid yellow; margin-right:106px;width:auto;text-align:left;float: left; background:url(images/footer-m.png) }
+#footer .mdl div{height:66px;width:760px;padding:20px 0px 0px 26px; line-height:62px; 
+                  font-size:1.2em; color:#666;background:url(images/footer-mdl-bg.png) no-repeat 25px 65px}
+#footer .mdl a{color:#666; text-decoration: none;}
+#footer .mdl a:hover{text-decoration: underline;color:#444}
+#footer .rgt{height:90px; width:106px; background:url(images/footer-r.png);float: left;}
+#footer .rgt div{height: 39px; width:50px; margin:48px 0px 0px 30px;
+          background:url(images/weixin-weibo.png) -52px -45px no-repeat; cursor:pointer}
+#footer .rgt div:hover{background:url(images/weixin-weibo.png) 0px -45px no-repeat;}
+ 

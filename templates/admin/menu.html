@@ -1,0 +1,33 @@
+{% extends "admin/base.html" %}
+
+{% block tittle %}
+{{ title }}
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block main %}
+<form class="group_add" action="" method="post">
+  <table>
+    <tr>
+      <th>序号</th>
+      <th>显示顺序</th>
+      <th>名称</th>
+      <th>代码</th>
+      <th>url</th>
+      <th>操作</th>
+    </tr>
+    {% for menu in menu_list %}
+    <tr>
+      <td>{{menu.id}}</td>
+      <td>{{menu.list_order}}</td>
+      <td>{{menu.name}}</td>
+      <td>{{menu.code}}</td>
+      <td>{{menu.url}}</td>
+      <td><a href="{% url 'admin:menu_act' action='edit' %}?mid={{menu.id}}">编辑</a> | 禁用 | 删除 </td>
+    </tr>
+    {% endfor %}
+  </table>
+</form>
+{% endblock %}

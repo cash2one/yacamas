@@ -1,0 +1,49 @@
+{% extends "admin/base.html" %}
+
+{% block tittle %}
+  乔治白--extended tittle 
+{% endblock %}
+
+{% block header %}
+  
+{% endblock %}
+{% block main %}
+<table>
+  {% for o_group in rs %}
+  <tr>
+    <td>{{ o_group.id }}</td>
+    <td>{{ o_group.name }}</td>
+    <td>
+      <a href="{% url 'admin:group_act' action='edit' %}?gid={{o_group.id}}">编辑</a>
+      | 
+      {# 删除时注意  若已经有用户加入 则应在对应用户 下 删除 #}
+      {# 对应表： auth_group_premissions auth_user_groups 删除对应本group_id的项 #}
+      <a href="{% url 'admin:group_act' action='del' %}?gid={{o_group.id}}">删除</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+<ul class="page">
+<a href="javascript:void()" pn="1"><li>首页</li></a>
+<a href="javascript:void()" pn="{{p_prev}}"><li>上一页</li></a>
+{% for p in p_list %}
+<a href="javascript:void();" 
+  {% if pn == p %}
+    class="current_page" 
+  {%endif%}
+  pn="{{p}}"><li>{{p}}</li></a>
+{% endfor %}
+<a href="javascript:void()" pn="{{p_next}}"><li>下一页</li></a>
+<a href="javascript:void()" pn="{{p_total}}"><li>末页</li></a>
+<form action="" method="post"><input type="hidden" name='pn' value="1"> </form>
+</ul>
+<script>
+  $(function(){
+    $('.page a').on('click', function(){
+      $('.page input').val($(this).attr('pn'));
+      $('.page form').submit();
+      return false;
+    }) 
+  })
+</script>
+{% endblock %}

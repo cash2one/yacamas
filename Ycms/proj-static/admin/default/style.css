@@ -1,0 +1,43 @@
+body,iframe,div,span,ul,li,h1,h2,h3,h4,h5,h6{
+  margin:0;
+  padding:0;
+  font-size:12px
+}
+.fl{
+  float:left;
+}
+.fr{
+  float:right;
+}
+.clr{
+  clear:both;
+}
+.div2tab::before,
+.div2tab::after{
+  display:table;
+}
+.div2tabcell{
+  display:table-cell;
+}
+.top-level-box{
+  width:100%;
+}
+
+body{background:#f5faf8;padding: 20px}
+input,button, textarea, select{color:#666; font-size:14px; line-height:20px; border:2px solid #dce4ec; border-radius:5px; padding:3px 8px}
+input:focus, button:focus; textarea:focus, select:focus{color:#006633;border:2px solid #00aa88; outline:0}
+table {
+ border-collapse:collapse;
+ width:90%;
+ border:1px solid #ccc
+
+}
+td,th{border:1px solid #ddd; padding:7px; color:#666}
+td a{color:#666}
+table.input td,th{border:none; background:none;font-size:14px; font-weight:normal}
+/** 分页 **/
+.page ul,li {list-style:none}
+.page a{text-decoration:none;diaplay:block; float:left; color: #666; padding:5px; margin:5px}
+.page a:visited{text-decoration:none;diaplay:block; float:left; color: #666; padding:5px; margin:5px}
+.page a:hover{diaplay:block; background:#ccc;float:left; color: #666; padding:5px; margin:5px}
+.page .current_page{font-weight:bold; font-size:16px; border:1px solid #ccc}

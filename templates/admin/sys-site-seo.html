@@ -1,0 +1,41 @@
+{% extends "admin/base.html" %}
+
+{% block tittle %}
+{{ title }}
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block main %}
+<form class="group_add" action="" method="post">
+  <input type="hidden" name="keyId" value="{{keyId}}" />
+  <table class="input">
+    <tr>
+      <th>SEO标题</th>
+      <td><input type="text" name="title" size="60" /></td>
+    </tr>
+    <tr>
+      <th>SEO关键字</th>
+      <td><input type="text" name="keyword" size="60" /></td>
+    </tr>
+    <tr>
+      <th>SEO描述</th>
+      <td><textarea cols=55 rows=6 name="description"></textarea></td>
+    </tr>
+  </table>
+ <button value="1">提交</button>
+</form>
+<script>
+$(function(){
+  {% autoescape off %}
+  var data={{oval}};
+  {% endautoescape %}
+  if(data){
+    for(i in data){
+      $('td').children('[name='+i+']').val(data[i]);
+    }
+  }
+  });
+</script>
+{% endblock %}

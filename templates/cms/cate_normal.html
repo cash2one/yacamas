@@ -1,0 +1,43 @@
+{% extends "cms/base.html" %}
+{% block main %}
+  {% load staticfiles %}
+		<div id="main" class="toplvl-box"> 
+			<div class="cate-gs-content"> 
+				<div class="content-lft">
+					<div>
+						<ul>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li> 
+						</ul>
+					</div>
+				</div>
+				<div class="content-rgt">
+					<div class="head">
+						  
+						<div class="foot">
+							<span class="up scroll-nrw">&nbsp;</span>
+							<span class="down scroll-nrw">&nbsp;</span>
+						</div>
+					</div>
+					<div class="main">
+						
+						<div class="scroll-content content">
+                     {% autoescape off %}
+                        {{ o_arch.content }}
+                        {% endautoescape %}
+	
+						</div>
+					</div>
+
+				</div> 
+				
+			</div>
+		</div>
+
+
+		<div id="bg-wrapper">
+			<img id="bg-all" style="display:none;width:100%;" src="{% static 'cms/default/images/bgbig/a161.jpg' %}"  />
+		</div>
+  {% endblock %}

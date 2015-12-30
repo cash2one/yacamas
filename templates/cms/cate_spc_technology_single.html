@@ -1,0 +1,41 @@
+{% extends "cms/base.html" %}
+{% block main %}
+  {% load staticfiles %}
+		<div id="main" class="toplvl-box"> 
+			<div class="cate-kj-content"> 
+				<div class="content-lft">
+					<div class="head">
+						<div class="head-content">
+							<span>工艺简介</span>
+							<span>动态演示</span>
+							<span>四大科技</span>
+							<span>七大特点</span>
+						</div>
+						<div class="foot">
+							<span class="up scroll-nrw">&nbsp;</span>
+							<span class="down scroll-nrw">&nbsp;</span>
+						</div>
+						<div class="clr"></div>
+					</div>
+					<div class="main">
+						<div class="scroll-content content">
+
+{{ o_arch.content }}	
+
+						</div>
+						<div class="content-rgt"></div>
+					</div>
+					<div class="kj-thumb">
+						<div id='4a'>dfdf</div>
+						<div id='eeq'></div>
+						<div id='upc'></div>
+						<div id='rk'></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<div id="bg-wrapper">
+			<img id="bg-all" style="display:none;width:100%;" src="{% static 'cms/default/images/bgbig/a12.jpg' %}"  />
+		</div>
+
+  {% endblock %}

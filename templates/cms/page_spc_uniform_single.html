@@ -1,0 +1,145 @@
+{% extends "cms/base.html" %}
+{% block main %}
+  {% load staticfiles %}
+		<div id="main" class="toplvl-box"> 
+			<div class="content-wrapper uniform"> 
+				<div class="lft">
+					<div class="head">职业装<br/><span> GIUSEPPE UNIFORM</span></div>
+					<div class="main">
+						<div class="scroll-content content">
+
+{% autoescape off %}
+{{ o_arch.content }}	
+{% endautoescape %}
+                    	</div>
+					</div>
+					<div class="foot"><span class="up scroll-nrw">&nbsp;</span><span class="down scroll-nrw">&nbsp;</span></div>
+				</div>
+				<div class="rgt">
+					<div class="cate-thumb" id='cate-thumb-1'></div>
+					<div class="cate-thumb" id='cate-thumb-2'></div>
+					<div class="cate-thumb" id='cate-thumb-3'></div>
+					<div class="cate-thumb" id='cate-thumb-4'></div>
+				</div>
+			</div>
+            <div id="corner-r"></div>
+            <div id="corner-l"></div>
+		</div>
+	<div id="bg-wrapper">
+			<img id="bg-all"  style="display:none" src="{% static 'cms/default/images/bgbig/18.jpg' %}"  />
+		</div>
+  {% endblock %}
+  {% block footer %}
+<script>
+var corner ={
+              init : function(){
+                var $wrapperL = $('div.uniform .lft'),
+                    $wrapperR = $('div.uniform .rgt'),
+                    $corner_l= $('div#corner-l'),
+                    $corner_r= $('div#corner-r'),
+                    wrapperT = $wrapperL.position().top,
+                    wrapperL = $wrapperL.position().left,
+                    wrapperB = wrapperT + $wrapperL.outerHeight(),
+                    corner_l_Lft = wrapperL - 12,
+                    corner_l_Top = wrapperB - 9,
+                    corner_r_Lft = wrapperL + 
+                    $wrapperL.outerWidth() + $wrapperR.outerWidth() - 28,
+                    corner_r_Top = wrapperT - 13,
+                    corner_l_LftStart = corner_l_Lft - 30,
+                    corner_l_TopStart = corner_l_Top + 30;
+                    corner_r_LftStart = corner_r_Lft + 30,
+                    corner_r_TopStart = corner_r_Top - 30;
+
+                $corner_l.css({'left':corner_l_LftStart, 'top':corner_l_TopStart})
+                         .show(100, function(){
+                                      $(this).animate({'left':corner_l_Lft, 'top':corner_l_Top}, 200);
+                                    });
+                $corner_r.css({'left':corner_r_LftStart, 'top':corner_r_TopStart})
+                         .show(100, function(){
+                                        $(this).animate({'left':corner_r_Lft, 'top':corner_r_Top}, 200);
+                                      });
+              }
+
+           }
+$(function(){
+           
+           corner.init();
+           $(window).on('resize', function(){
+                   corner.init();
+               }).on('orientationchange', function(){
+                   corner.init();
+		});
+				/****
+				 * 背景图像切换   TODO: 图像预加载没有正确实现
+				 */
+			var bgChange = {
+					srcs: [
+							static_url + '/' + 'images/bgbig/13.jpg',
+							static_url + '/' + 'images/bgbig/10.jpg',
+							static_url + '/' + 'images/bgbig/14.jpg',
+							static_url + '/' + 'images/bgbig/02.jpg',
+							static_url + '/' + 'images/bgbig/20.jpg',
+							static_url + '/' + 'images/bgbig/22.jpg',
+							static_url + '/' + 'images/bgbig/18.jpg',
+						],
+					arrOImg: [],
+					lastImg: 0,
+					preLoad: function(){
+						for (src in this.srcs){
+							var oImg = new Image();
+							oImg.src = src;						
+							var that = this;
+							oImg.onload = function(){
+								that.arrOImg.push(oImg) ;
+							} 							
+						}
+					},
+					
+ 					doChange: function(){
+							if (this.lastImg >= this.srcs.length){
+								oImg = this.srcs[0]; 
+								this.lastImg = 0;
+							}
+							else{
+								crntImg = this.lastImg++;
+								oImg = this.srcs[crntImg];
+                if ($('#bg-all').attr('src').indexOf(oImg) >= 0){
+                  crntImg = this.lastImg++;
+                  oImg = this.srcs[crntImg];
+                }
+							}
+	      
+              $('#bg-all').fadeTo(600, 0.09, function(){
+							  $('#bg-all').attr('src', oImg).fadeTo(700, 1, function(){
+                
+                }).delay(3600); 
+              });
+					},
+					
+					init: function(){
+						var that = this;
+							setInterval(function(){that.doChange();}, 5000);
+						
+					}					
+				}
+  bgChange.init();
+  var chgCateThumb = {
+    init : function(){
+             $('.cate-thumb').on('mouseenter', function(){
+                  var bigImg = $(this).attr('big-img'),
+                      _top = $(this).parent().position().top + 24,
+                      _left = $(this).parent().position().left +
+                      $(this).parent().outerWidth() + 5;
+
+                  $('body').append('<div class="big-cate-thumb" id="big-'+ $(this).attr('id')+'" ></div>'); 
+                  $('#big-' + $(this).attr('id')).css({'top': _top,'left': _left}).slideDown(300);
+                  }).on('mouseout', function(){
+                    $('#big-' + $(this).attr('id')).hide(100, function(){
+                      $(this).remove()});
+                    }); 
+        } 
+  }
+  chgCateThumb.init();
+})
+</script>
+  {% endblock %}

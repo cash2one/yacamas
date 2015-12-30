@@ -1,0 +1,5 @@
+<uwsgi>
+    <socket>127.0.0.1:8630</socket>
+    <chdir>/home/project/yacamas/Ycms</chdir>
+    <module>wsgi</module>
+</uwsgi>

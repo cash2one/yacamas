@@ -1,0 +1,46 @@
+body,iframe,div,span,ul,li,h1,h2,h3,h4,h5,h6{
+  margin:0;
+  padding:0;
+}
+body{
+  overflow:scroll;
+  overflow-x:hidden;
+  overflow-y:hidden;
+  min-with:900px;
+}
+.fl{
+  float:left;
+}
+.fr{
+  float:right;
+}
+.clr{
+  clear:both;
+}
+.div2tab::before,
+.div2tab::after{
+  display:table;
+}
+.div2tabcell{
+  display:table-cell;
+}
+.top-level-box{
+  width:100%;
+}
+
+/** test static of django **/
+body{
+  background:#f3f3f3;
+  color:#009966;
+}
+
+.title{
+  font-size:16px;
+  font-weight:bold;
+  color:#666;
+  background:#ddd;
+}
+.content{
+  border:1px solid #ccc;
+  background:#eee;
+}

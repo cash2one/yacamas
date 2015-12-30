@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="Description" content="">
+    <title>校服--乔治白服饰济南公司</title>
+<style type="text/css">
+body{background:#fff; margin: -35px 0px 0px 0px ; padding:0px;
+  text-align:center; font-size:13px}
+img{padding:0px; border:0px; margin:0px}
+</style>
+{% load staticfiles %}
+    <script src="{% static 'cms/default/js/jquery.min.1.11.3.js' %}"></script>
+</head>
+<body>
+<div id="imgbox">
+  {% load staticfiles %}
+{% autoescape off %}
+{{ o_arch.content }}	
+{% endautoescape %}
+</div>
+<a href="/"><img title="返回首页" src="{% static 'cms/default/images/logo-touming.png'%}"
+  style="position:absolute; left:5px; top:5px"/></a>
+<script>
+$(function(){
+      var winW = $(window).innerWidth();
+      $('#imgbox img').outerWidth(winW);
+      $(window).on('resize', function(){
+        var winW = $(window).innerWidth();
+        $('#imgbox img').outerWidth(winW);
+        })
+    });
+
+</script>
+</body>
+</html>

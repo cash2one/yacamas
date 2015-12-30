@@ -1,0 +1,54 @@
+{% extends "cms/base.html" %}
+{% block main %}
+  {% load staticfiles %}
+		<div id="main" class="toplvl-box"> 
+			<div class="content-wrapper tech"> 
+				<div class="lft">
+                  <div class="head">
+                    <ul>
+                    {% for arch in arch_list %}
+                    <li><a  {% if arch.id == o_arch.id %} class="crnt" {% endif %}href="/cms/?m={{m_lower}}&aid={{arch.id}}">{{arch.title}}</a></li>
+                    {% endfor %}
+                    </ul>
+					<span class="up scroll-nrw">&nbsp;</span><span class="down scroll-nrw">&nbsp;</span>
+                  </div>
+					<div class="main">
+						<div class="scroll-content content">
+
+{% autoescape off %}
+{{ o_arch.content }}	
+{% endautoescape %}
+                    	</div>
+					</div>
+                    <div class="foot">
+                      <a href=""><div class="cate-thumb" id="4a"></div></a>
+                      <a href=""><div class="cate-thumb" id="eeq"></div></a>
+                      <a href=""><div class="cate-thumb" id="upc"></div></a>
+                      <a href=""><div class="cate-thumb" id="t-plus"></div></a>
+                      <div id="tech-footer">科技力量<span>Technology</span></div>
+                    </div>
+				</div>
+			</div>
+            <div id="corner-r"></div>
+            <div id="corner-l"></div>
+		</div>
+	<div id="bg-wrapper">
+			<img id="bg-all" style="display:none" src="{% static 'cms/default/images/bgbig/a18.jpg' %}"  />
+		</div>
+        <script>
+        var tplDic = {'4A':'a18.jpg', 'EEQ':'a16.jpg', 
+                      'UPC':'a15.jpg', 'T-PLUS': 'a17.jpg'},
+                      crntBg ="{% static 'cms/default/images/bgbig/' %}" + tplDic['{{m}}'];
+          
+        $(function(){
+            
+            $('#4a').parent().attr('href', $('div#nav li a[m_code=4a]').attr('href'));
+            $('#eeq').parent().attr('href', $('div#nav li a[m_code=eeq]').attr('href'));
+            $('#upc').parent().attr('href', $('div#nav li a[m_code=upc]').attr('href'));
+            $('#t-plus').parent().attr('href', $('div#nav li a[m_code=t-plus]').attr('href'));
+            
+          });
+        </script>
+  {% endblock %}
+  {% block footer %}
+  {% endblock %}

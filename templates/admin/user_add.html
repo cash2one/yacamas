@@ -1,0 +1,54 @@
+{% extends "admin/base.html" %}
+
+{% block tittle %}
+  乔治白--extended tittle 
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block main %}
+<form class="user_add" action="" method="post">
+  <table class="input">
+    <tr>
+      <th>用户名：</th>
+      <td>{{form.username}}</td>
+    </tr>
+    <tr>
+      <th>密码：</th>
+      <td>{{form.password}}</td>
+    </tr>
+    <tr>
+      <th>姓名：</th>
+      <td>{{form.first_name}}</td>
+    </tr>
+    <tr>
+      <th>是否管理员：</th>
+      <td><input  name="is_superuser" type="radio" value=1 /> 是 <input name="is_superuser"  type="radio" value=0
+        checked="checked" /> 否  </td>
+    </tr>
+  </table>
+
+  {# 用户组列表 #}
+  <div class="group_list">
+    <div class="title">选择用户组:</div>
+    {% for group in group_list %}
+    <input type="checkbox" value="{{group.id}}" name="group_ids"> {{group.name}}
+    {% endfor %}
+  </div>
+  
+  <button name="do_submit" value="1">添加</button>
+</form>
+{% if is_error %}
+  <script>
+    $(function(){
+      {% autoescape off %}
+      var err = {{content}};
+      {% endautoescape %}
+      for( i in err){
+        alert(err[i][0]['message']);
+      }
+    })
+  </script>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "cms/base.html" %}
+{% block main %}
+  {% load staticfiles %}
+		<div id="main" class="toplvl-box"> 
+			<div class="cate-kj-content"> 
+				<div class="content-lft">
+					<div class="head">
+						<div class="head-content">
+							<span class="sec" id='gyjj' mark="gyjj">工艺简介</span>
+							<span class="sec" mark="dtys">动态演示</span>
+							<span class="sec" mark="sdkj">四大需求</span>
+							<span class="sec" mark="qdtd">业界领先</span>
+						</div>
+						<div class="foot">
+							<span class="up scroll-nrw">&nbsp;</span>
+							<span class="down scroll-nrw">&nbsp;</span>
+						</div>
+						<div class="clr"></div>
+					</div>
+					<div class="main">
+						<div class="scroll-content content">
+                          
+						</div>
+						<div class="content-rgt"></div>
+					</div>
+					<div class="kj-thumb">
+                      <a href="/cms/?m=4a&aid=6"><div id='4a'></div></a>
+						<a href="/cms/?m=eeq&aid=7"><div id='eeq'></div></a>
+						<a href="/cms/?m=upc&aid=8"><div id='upc'></div></a>
+						<a href="/cms/?m=t-plus&aid=9"><div id='rk'></div></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	<div id="bg-wrapper">
+			<img id="bg-all" style="display:none;width:100%;" src="{% static 'cms/default/images/bgbig/a12.jpg' %}"  />
+		</div>
+<script>
+      var all_left = $('.cate-kj-content').position().left,
+        all_top = $('.cate-kj-content').position().top,
+       all_w = $('.cate-kj-content .head').outerWidth(),
+       its_r = all_left + all_w + 50;
+       //alert(its_r)
+       $('body').append('<img id="r_pic" src="{% static 'cms/default/images/upc.png'%}" style="display:none" />');
+       $('#r_pic').css({'position':'absolute', 'top':all_top - 50,  'left':its_r + 100, 'z-index':999});
+       $('#r_pic').fadeIn(3900)
+       //alert($('#r_pic').attr('src'));
+
+var data = {'gyjj':' <span> <img src="{% static 'cms/default/images/upc-3d.png' %}" style="margin:10px 10px 5px 0px; float:left" />乔治白职业装个性定制系统（Uniform Personal Customize，以下简称UPC系统）正是基于FRP进行资源整合、流程再造，结合职业装定制特性，如体型差异、年龄差异、地域差异、个人喜好等多方面个体综合因素研发的新型职业装个性定制系统。它将工业化生产的精细、快速与手工定制的精准、个体合体化进行了完美的结合。 </span>',
+  'dtys':'<span> <div style="margin:10px 0px 0px 60px;padding:0px" class="player video-box"> <object width="428" height="229" data="/static/cms/default/images/upc.swf" type="application/x-shockwave-flash"> <param name="data" value="/static/cms/default/images/upc.swf"> <param name="src" value="/static/cms/default/images/upc.swf"> </object> </div> </span>',
+  'sdkj':'<span> <img src="{% static 'cms/default/images/sdxq.png' %}" style="height:250px;margin:0px 10px 5px 0px; float:left" /><strong>季节、天气变化对保暖性能，款式生产的需求；</strong><br/><br/><br/> <strong>人体体型差异变化对于西装有更高的要求；</strong><br/><br/><br/> <strong>日新月异的流行趋势对西装版型、款式产生的时尚需求；</strong><br/><br/><br/> <strong>同一团队中不同职业、不同职级人员对于职业装的差异需求；</strong><br/><br/><br/> </span>',
+            'qdtd':'<span> <img src="{% static 'cms/default/images/yjlx.png' %}" style="float:left;margin:10px 10px 5px 0px; height:230px" /><strong>研发领先、生产领先、售后领先，全面领跑行业至少两年。</strong><br/> 经科研专家分析鉴定，乔治白UPC系统的启用，效率环比提高21.3%，产能同比提高29.7%，返修下降9%。该系统实现了职业装行业的重大跨越，远远领先同行业。日本一拥有百年历史的制服品牌在参观乔治白UPC系统后，对UPC系统赞叹不已，当场提出合作意向，希望双方达成长期性战略合作，实现系统共享。其对UPC系统的重视与慎重的态度表明即使是在制服产业最为发达的日本，乔治白UPC系统依然具有领先性。 </span>' }
+$(function(){
+    chgCtnt($('#gyjj'));
+    $('.sec').on('click', function(){
+        chgCtnt($(this));
+      })
+    function chgCtnt(obj){
+        var dmark = obj.attr('mark');
+        var str  = data[dmark];
+        $('.sec').css({'color':'#666','background':''});
+        obj.css({'color':'#fff','background':'#009966'});
+        $('.scroll-content').html('');
+        $('.scroll-content').html(str);
+    }
+    })
+</script>
+  {% endblock %}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <title>
+      {{ page_title }}
+      {% block tittle %}
+      {% endblock %}
+    </title>
+    <style type="text/css"></style>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'cms/default/style.css' %}?ver=0.9" />
+    <script src="{% static 'cms/default/js/jquery.min.1.11.3.js' %}"></script>
+    {% block header %}
+    {% endblock %}
+  </head>
+  <body>
+  	  <div id="topall" ></div>
+      <div id="top">
+          <div id="logo" ><a  href="/"><img src="{% static 'cms/default/images/logo.png' %}" /></a></div>
+          <div id="nav" >
+    		<ul>  
+              {% for menu in menus %}
+              <li {% if menu.if_crnt %} class="nav-btm-line" {% endif %} >
+              <a target="" if-crnt="{{menu.if_crnt}}"  href="{{ menu.url }}" m_code="{{menu.code}}">{{menu.name}}</a>
+                {# sub menu #}
+                  {% if menu.sub %}
+                    <ul{% if menu.if_crnt %} class="show" {% endif %}>
+                    {% for submenu in menu.sub %}
+                      <li {% if submenu.if_crnt %} class="nav-btm-line" {% endif %} >
+                      <a target="" if-crnt="{{submenu.if_crnt}}"  href="{{ submenu.url }}" m_code="{{submenu.code}}">{{submenu.name}}</a>
+                    {% endfor %}
+                    </ul>
+                  {% endif %}
+                </li>
+              {% endfor %}
+			</ul>
+          </div>
+      </div> 
+
+      {% block main %}
+      {% endblock %}
+    <div id="footer">
+      <div id="footer-3-l">
+        <div id="footer-2-l">
+              <div class="lft">
+                  <div>
+                  </div>
+              </div>
+              <div class="mdl">
+                  <div>
+                    <a  target="_blank" href="blog.sdgiuseppe.cn">职业装 BLOG</a> · 
+                    <a  target="_blank" href="">网站地图</a> · 
+                    <a  target="_blank" href="">版权所有</a> · 
+                    <a  target="_blank" href="">隐私安全</a> · 
+                    <a  target="_blank" href="http://www.giuseppe.cn">总部网站</a> · 
+                    <a  target="_blank" href="">联系方式</a>
+                    &nbsp; &nbsp;
+                    &nbsp; &nbsp;
+                    <a target="_blank" href="">鲁ICP备15014965号-1</a>
+                  </div>
+              </div>
+        </div>
+			<div class="rgt">
+				<div>
+                </div>
+			</div>
+      </div>
+	</div>	
+    <div id="erweima"></div>
+    {% block footer %}
+    {% endblock %}
+    <script>
+    var static_url = "{% static 'cms/default' %}";
+    $(function(){
+        try{
+          if (crntBg != undefined){
+            $('#bg-all').attr('src', crntBg);
+          }
+          }catch(e){}
+        $('#bg-all').fadeIn(500);
+      })
+    </script>
+  
+    <script src="{% static 'cms/default/js/main.js' %}?ver=0.91"></script>
+  </body>
+</html>

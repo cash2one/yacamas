@@ -1,0 +1,108 @@
+{% extends "admin/base.html" %}
+
+{% block tittle %}
+  乔治白--extended tittle 
+{% endblock %}
+
+{% block header %}
+{% load staticfiles %}
+<script type="text/javascript" charset="utf-8" src="{% static 'pub/umeditor1.2.2/umeditor.config.js' %}"></script>
+<script type="text/javascript" charset="utf-8" src="{% static 'pub/umeditor1.2.2/umeditor.min.js' %}"></script>
+<link  rel="stylesheet" charset="utf-8" href="{% static 'pub/umeditor1.2.2/themes/default/css/umeditor.min.css' %}" />
+<script type="text/javascript" charset="utf-8" src="{% static 'pub/umeditor1.2.2/lang/zh-cn/zh-cn.js' %}"></script>
+{% endblock %}
+ 
+{% block main %}
+{{ form.errors }}
+<form action="" method="post" enctype="multipart/form-data">
+  <table>
+    <tr>
+      <th class="label">分类：</th>
+      <td class="input">
+        <select name="cate_id">
+          <option value="-1">--- 选择分类 ---</option>
+          {% autoescape off %}
+            {% for cate in cates %}
+              {{ cate }}
+            {% endfor %}
+          {% endautoescape %}
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th class="label">标题：</th>
+      <td class="input"><input type="text" size="60" name="title"></td>
+    </tr>
+    <tr>
+      <th class="label">作者</th>
+      {# TODO:<已完成> jquery操作--所选用户填写到后面input #}
+      {# TODO: 当前用户默认填写到作者字段 #}
+      <td class="input">
+        <select name="" id="user_select">
+          <option value="-1">--- 选择作者 ---</option>
+          {% autoescape off %}
+            {% for user in user_list %}
+              {{ user }}
+            {% endfor %}
+          {% endautoescape %}
+        </select>
+        <input type="text" size="30" name="author"></td>
+    </tr>
+    <tr>
+      <th class="label">摘要：</th>
+      <td class="input">
+      <textarea rows="5" cols="60" name="summary"></textarea></td>
+      </td>
+    </tr>
+    <tr>
+      <th class="label">正文：</th>
+      {# TODO: 这里要用editor 富文本编辑器代替 #}
+      <td class="input">
+        <script id="container" name="content" type="text/plain" style="width:800px;
+height:300px"></script>
+        <textarea rows="1" cols="60" name="content"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <th class="label">描述(seo)：</th>
+      <td class="input"><input type="text" size="60" name="description">
+        <span class="tips">seo描述，限90字以内。</span>
+      </td>
+    </tr>
+    <tr>
+      <th class="label">关键词（seo）：</th>
+      <td class="input"><input type="text" size="60" name="keywords">
+        <span class="tips">seo关键词（逗号隔开的关键词），限90字以内。</span>
+      </td>
+    </tr>
+    <tr>
+      <th class="label">来源：</th>
+      <td class="input"><input type="text" size="60" name="referer">
+        <span class="tips">文章出处</span>
+      </td>
+    </tr>
+    <tr>
+      <th class="label">推荐位：</th>
+      <td class="input">
+          {% autoescape off %}
+            {% for pos in pos_list %}
+              {{ pos }}
+            {% endfor %}
+          {% endautoescape %}
+      </td>
+    </tr>
+  </table>
+  <button name="do_submit" value="1">提交</button>
+</form>
+<script>
+$(function(){
+    // 用户选择 作者
+    $('select#user_select').on('change',function(){
+        var new_author = $(this).children('option[value='+$(this).val()+']').text(); 
+        $(this).siblings('input[name=author]').val(new_author);
+      });
+    })
+/*****  初始化编辑器  ****/
+var um = UM.getEditor('container');
+</script>
+{% endblock %}

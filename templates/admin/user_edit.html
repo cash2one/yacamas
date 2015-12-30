@@ -1,0 +1,66 @@
+{% extends "admin/base.html" %}
+{% load mytags %}
+{% block tittle %}
+  乔治白--extended tittle 
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block main %}
+<form class="user_add" action="" method="post">
+  <table class="input">
+    <tr>
+      <th>用户名：</th>
+      <td>{{form.username}}</td>
+    </tr>
+     <tr>
+      <th>别名：</th>
+      <td>{{form.first_name}}
+      <span class="tips"> <span class="red">*</span> 请务必填写！将会作为文章的作者显示</span>
+      </td>
+    </tr>
+    <tr>
+      <th>密码：</th>
+      <td>
+        <input type="text" name="password" />
+        <span class="tips"> <span class="red">*</span> 若不修改密码请留空</span>
+      </td>
+    </tr>
+    <tr>
+      <th>是否管理员：</th>
+      <td>
+        <input
+        {% if oUser.is_superuser %}
+        checked="checked" 
+        {% endif %}
+        name="is_superuser" type="radio" value=1 /> 是 <input name="is_superuser"  type="radio" value=0 
+        {% if not oUser.is_superuser %}
+        checked="checked" 
+        {% endif %}
+        /> 否  </td>
+    </tr>
+  </table>
+  {# 用户组列表 #}
+  <br/>
+  <div class="group_list">
+  <br/>
+    <div class="title">选择用户组:</div>
+  <br/>
+    {% for group in group_list %}
+    <input type="checkbox" value="{{group.id}}"
+    {% if group.id in current_group_list%} 
+      checked="checked"
+    {% endif %} 
+    name="group_ids"> {{group.name}}
+    {% endfor %}
+  </div>
+  <input type='hidden' name='uid' value="{{id}}" />
+  <button name="do_submit" value="1">修改</button>
+</form>
+<script>
+$(function(){
+    
+    })
+</script>
+{% endblock %}
